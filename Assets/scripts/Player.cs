@@ -9,12 +9,13 @@ public class Player : MonoBehaviour
     //vetor de posição inicial
     private Vector3 posInicial;
     //variavel da velocidade
-    private float speed;
+    private float speed = 5;
     // Start is called before the first frame update
+    public Animator animator;
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
-        posInicial = new Vector3(0f, 0f, 0f);
+        posInicial = new Vector3(-0.67f, -1.29f, 0f);
         transform.position = posInicial;
     }
 
@@ -22,11 +23,22 @@ public class Player : MonoBehaviour
     void Update()
     {
         rig.velocity = new Vector2(speed,rig.velocity.y);
+        rig.velocity = new Vector2(Input.GetAxis("Hotizontal") * speed, rig.velocity.y);
+        if (Input.GetAxis("Horizontal")!= 0)
+        {
+            animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
+        }
         if (Input.GetKeyDown(KeyCode.A) && transform.localScale.x > 0)
         {
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         }
-        if (Input.GetKeyDown(KeyCode.D)&& transform.localScale.x < 0){
+
+        if (Input.GetKeyDown(KeyCode.D)&& transform.localScale.x < 0)
+        {
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         }
     }
