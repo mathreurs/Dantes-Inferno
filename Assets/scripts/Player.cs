@@ -44,11 +44,20 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Line"))
+        if (collision.gameObject.CompareTag("Line"))
         {
+            Debug.Log("foi de vasco");
             //retorno do personagem para a posição inicial
             transform.position = posInicial;
-        }  
+        }
+        
+        if(collision.gameObject.CompareTag("Checkpoint"))
+        {
+            Debug.Log("Checkpoint");
+            //modificar a posição inicial para a posição checkpoint
+            posInicial = collision.gameObject.transform.position;
+        }
+        
 
     }
 }
