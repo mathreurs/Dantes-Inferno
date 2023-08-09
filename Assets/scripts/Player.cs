@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         rig.velocity = new Vector2(speed,rig.velocity.y);
-        rig.velocity = new Vector2(Input.GetAxis("Hotizontal") * speed, rig.velocity.y);
+        rig.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rig.velocity.y);
         if (Input.GetAxis("Horizontal")!= 0)
         {
             animator.SetBool("isMoving", true);
@@ -41,5 +41,14 @@ public class Player : MonoBehaviour
         {
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Line"))
+        {
+            //retorno do personagem para a posição inicial
+            transform.position = posInicial;
+        }  
+
     }
 }
